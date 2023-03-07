@@ -20,6 +20,7 @@ class ContactRepositoryImpl(
         ) {
             requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
         }
+
         val contactList = ArrayList<Contact>()
         val uri: Uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         val cursor = context.contentResolver.query(uri, null, null, null)
@@ -27,12 +28,14 @@ class ContactRepositoryImpl(
         if (cursor!!.count == 0) {
             return contactList
         }
+
         while (cursor.moveToNext()) {
             val columnIndex =
                 cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
             val name = cursor.getString(columnIndex)
             contactList.add(Contact(name))
         }
+
         cursor.close()
 
         return contactList

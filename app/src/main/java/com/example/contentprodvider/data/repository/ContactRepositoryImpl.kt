@@ -30,8 +30,10 @@ class ContactRepositoryImpl(
         }
 
         while (cursor.moveToNext()) {
-            val columnIndex =
-                cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+            val columnIndex = cursor.getColumnIndex(
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+            )
+
             val name = cursor.getString(columnIndex)
             contactList.add(Contact(name))
         }
